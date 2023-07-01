@@ -4,9 +4,8 @@
     github: https://github.com/mbijanpour/TelegramBot
 """
 
-import os, time
+import os
 import telebot
-from tqdm import tqdm
 
 from redditDownloader import download
 
