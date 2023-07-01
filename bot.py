@@ -1,7 +1,7 @@
 """
     This Python code sets up a Telegram bot that can download videos from Reddit and send them to users.
     email: mahanbjanpour@gmail.com
-    github:
+    github: https://github.com/mbijanpour/TelegramBot
 """
 
 import telebot
@@ -28,12 +28,20 @@ def send_start(message):
 
 @bot.message_handler(func=lambda message: True)
 def get_message(message):
+
     chat_id = message.chat.id
     text = message.text
     video_path = download(text)
-    bot.send_video(chat_id=chat_id, video=open(video_path, 'rb'))
-    # for deleting the video after saving it for the user (optional)
-    os.remove(video_path)
+
+    if video_path == 'invalid':
+        # if links was invalid, it will send a message to the user
+        bot.send_message(
+            message.chat.id, 'invalid link, please provide a valid reddit video link!')
+    else:
+
+        bot.send_video(chat_id=chat_id, video=open(video_path, 'rb'))
+        # for deleting the video after saving it for the user (optional)
+        os.remove(video_path)
 
 
 # starting the bot ...
