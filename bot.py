@@ -4,9 +4,11 @@
     github: https://github.com/mbijanpour/TelegramBot
 """
 
+import os, time
 import telebot
+from tqdm import tqdm
+
 from redditDownloader import download
-import os
 
 
 # It initializes the Telegram bot with the provided token, which is a unique identifier for the bot.
@@ -28,17 +30,25 @@ def send_start(message):
 
 @bot.message_handler(func=lambda message: True)
 def get_message(message):
-
+    
     chat_id = message.chat.id
     text = message.text
+
+    bot.send_message(message.chat.id,
+                     'processing your link, please wait ...')
+    
     video_path = download(text)
 
     if video_path == 'invalid':
         # if links was invalid, it will send a message to the user
         bot.send_message(
             message.chat.id, 'invalid link, please provide a valid reddit video link!')
+    
     else:
-
+        
+        bot.send_message(
+            chat_id, 'uploading your video, please wait ...')               
+        
         bot.send_video(chat_id=chat_id, video=open(video_path, 'rb'))
         # for deleting the video after saving it for the user (optional)
         os.remove(video_path)

@@ -1,6 +1,7 @@
 {
     "cSpell.words": [
-        "redvid"
+        "redvid",
+        "tqdm"
     ],
     "[python]": {
         "editor.defaultFormatter": "ms-python.python"
