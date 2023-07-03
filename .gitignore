@@ -1,0 +1,4 @@
+# ignored files and directories for the current project
+
+vids/
+.vscode/

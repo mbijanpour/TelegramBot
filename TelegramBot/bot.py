@@ -7,7 +7,7 @@
 import os
 import telebot
 
-from redditDownloader import download
+from TelegramBot.redditDownloader import download
 
 
 # It initializes the Telegram bot with the provided token, which is a unique identifier for the bot.
